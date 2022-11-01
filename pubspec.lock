@@ -74,6 +74,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  http_exception:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: e6b9b8d9e6e5c5ccd7a4f84784abd812ee69b9aa
+      url: "https://github.com/andgar2010/http_exception"
+    source: git
+    version: "1.0.0"
   lints:
     dependency: transitive
     description:
