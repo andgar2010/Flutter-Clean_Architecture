@@ -6,8 +6,9 @@ import '../../../../../core/data/http/http_error.dart';
 /// Model class for [RemoteCounterModel]
 ///
 /// * [count] is the number of times the counter
-class RemoteCounterModel {
-  const RemoteCounterModel({required this.countA, required this.countB});
+class RemoteCounterModel extends CounterEntity {
+  const RemoteCounterModel({required this.countA, required this.countB})
+      : super(count: countA);
 
   factory RemoteCounterModel.fromEntity(CounterEntity entity) =>
       RemoteCounterModel(countA: entity.count, countB: 0);
@@ -21,7 +22,7 @@ class RemoteCounterModel {
     if (!json.keys.toSet().containsAll(<String>['countA', 'countB'])) {
       throw HttpStatus4xxErrorClient.unprocessableEntity_422.exception(
         data: json,
-        detail: 'Not found key "countA" and "countB" in JSON',
+        detail: "Not found key 'countA' and 'countB' in JSON",
       );
     }
 

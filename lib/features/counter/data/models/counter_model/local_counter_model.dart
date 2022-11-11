@@ -7,8 +7,8 @@ import '../../../domain/domain.dart';
 /// Model class for [LocalCounterModel]
 ///
 /// * [count] is the number of times the counter
-class LocalCounterModel {
-  const LocalCounterModel({required this.count});
+class LocalCounterModel extends CounterEntity {
+  const LocalCounterModel({required super.count});
 
   factory LocalCounterModel.fromEntity(CounterEntity entity) =>
       LocalCounterModel(count: entity.count);
@@ -23,15 +23,12 @@ class LocalCounterModel {
     if (!json.keys.toSet().containsAll(<String>['count'])) {
       throw HttpStatus4xxErrorClient.unprocessableEntity_422.exception(
         data: json,
-        detail: 'Not found key "count" in JSON',
+        detail: "Not found key 'count' in JSON",
       );
     }
 
     return LocalCounterModel(count: json['count'].toInt());
   }
-
-  /// [count] is the number of times the counter
-  final int count;
 
   @override
   String toString() => 'LocalCounterModel(count: $count)';
