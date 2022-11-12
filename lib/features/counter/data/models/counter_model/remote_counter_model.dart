@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../../../domain/entities/counter_entity.dart';
+import '../../../domain/entities/counter/counter_entity.dart';
 import '../../../../../core/data/http/http_error.dart';
 
 /// Model class for [RemoteCounterModel]

@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 
 class CounterPage extends StatefulWidget {
-  const CounterPage({super.key, required this.title});
+  const CounterPage({required this.title, super.key});
 
   static const String routeName = '/counter';
 
@@ -85,4 +84,3 @@ class _CounterPageState extends State<CounterPage> {
     );
   }
 }
-

@@ -1,1 +1,1 @@
-export 'counter_entity.dart';
+export 'counter/counter_entity.dart';

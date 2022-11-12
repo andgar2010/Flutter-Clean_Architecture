@@ -43,9 +43,9 @@ void main() {
         expect(
             e.toString(),
             endsWith(
-                'HTTP Status 422 - Unprocessable Entity: Not found key "count" '
-                'in JSON, HTTP data = {countA: 2000, countB: 1000}'));
-        expect(e.message, endsWith('Not found key "count" in JSON'));
+                "HTTP Status 422 - Unprocessable Entity: Not found key 'count' "
+                "in JSON, HTTP data = {countA: 2000, countB: 1000}"));
+        expect(e.message, endsWith("Not found key 'count' in JSON"));
         expect(e.status.toString(), endsWith('422'));
       }
     });
@@ -71,9 +71,9 @@ void main() {
         expect(
             e.toString(),
             endsWith(
-                'HTTP Status 422 - Unprocessable Entity: Not found key "count" '
-                'in JSON, HTTP data = {countA: 1000, countB: 500}'));
-        expect(e.message, endsWith('Not found key "count" in JSON'));
+                "HTTP Status 422 - Unprocessable Entity: Not found key 'count' "
+                "in JSON, HTTP data = {countA: 1000, countB: 500}"));
+        expect(e.message, endsWith("Not found key 'count' in JSON"));
         expect(e.status.toString(), endsWith('422'));
       }
     });
