@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-export 'gateway/counter_gateway.dart';
+// export 'gateway/counter_gateway.dart';
 
 
 /// Entry class for [CounterEntity]
