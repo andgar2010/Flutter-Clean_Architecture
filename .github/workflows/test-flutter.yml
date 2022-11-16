@@ -17,7 +17,8 @@ jobs:
       - run: flutter --version
       - run: flutter pub get
       - run: flutter pub add flutter_coverage_badge -d
-      - run: flutter test --test-randomize-ordering-seed=random --coverage
+      - run: dart pub global activate very_good_cli
+      - run: very_good test --coverage
       - run: flutter pub run flutter_coverage_badge
 
       # - uses: invertase/github-action-dart-analyzer@v1
