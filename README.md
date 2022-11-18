@@ -1,5 +1,9 @@
 # clean_architecture_counter
 
+![Coverage](https://raw.githubusercontent.com/andgar2010/clean_architecture_counter/master/coverage_badge.svg?sanitize=true)
+
+![Coverage](./coverage_badge.svg)
+
 A new Flutter project.
 
 ## Getting Started
