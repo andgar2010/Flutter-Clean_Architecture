@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 
 // export 'gateway/counter_gateway.dart';
 
-
 /// Entry class for [CounterEntity]
 ///
 /// * [count] is the number of times the counter
