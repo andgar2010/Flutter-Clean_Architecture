@@ -1,25 +1,73 @@
 name: "analyze"
 on: # rebuild any PRs and main branch changes
   pull_request:
+    # branches: [ master ]
   push:
     branches:
-      - main
+      - main # [ master ]
+  schedule:
+    - cron: "0 0 * * 0"
 
 jobs:
-  Flutter: # make sure the action works on a clean machine without building
+  # Check code formatting and static analysis on a single OS (linux)
+  # against Dart dev.
+  analyze:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: [stable, beta] # or: 'beta', 'dev' or 'master'
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
-          channel: "stable" # or: 'beta', 'dev' or 'master'
-      - run: flutter config --no-analytics
-      - run: flutter --version
-      - run: flutter pub get
-      - run: flutter pub add flutter_coverage_badge -d
-      - run: dart pub global activate very_good_cli
-      - run: very_good test --coverage
-      - run: flutter pub run flutter_coverage_badge
+          sdk: ${{ matrix.sdk }}
+      - id: install
+        name: Install dependencies
+        run: flutter pub get
+      - name: Check formatting
+        run: dart format --output=none --set-exit-if-changed .
+        if: always() && steps.install.outcome == 'success'
+      - name: Analyze code
+        run: dart analyze --fatal-infos
+        if: always() && steps.install.outcome == 'success'
+  test:
+    needs: analyze
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest] # or: macos-latest, windows-latest
+        sdk: [stable, beta] # or: 'dev' or 'master'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          sdk: ${{ matrix.sdk }}
+      - id: disabled_analytics_flutter
+        name: Disabled Analytics Flutter
+        run: flutter config --no-analytics
+      - id: checking_version_flutter
+        name: Check version Flutter is installed
+        run: flutter --version
+      - id: install_dependencies
+        name: Install dependencies
+        run: flutter pub get
+      - id: install_very_good_cli
+        name: Install Very Good CLI
+        run: dart pub global activate very_good_cli
+      - name: Run tests with coverage
+        run: very_good test --coverage
+        if: always() && steps.install.outcome == 'success'
+      - id: upgrade_package_flutter_coverage_badge
+        name: Upgrade package flutter_coverage_badge
+        run: flutter pub upgrade flutter_coverage_badge
+      - id: run_package_flutter_coverage_badge
+        name: Run package flutter_coverage_badge
+        run: flutter pub run flutter_coverage_badge
+      - id: read_folder_and_files
+        name: Read folder and files
+        run: ls
 
       # - uses: invertase/github-action-dart-analyzer@v1
       #   with:
@@ -95,7 +143,7 @@ jobs:
 #         os: [ubuntu-latest, macos-latest, windows-latest]
 #         sdk: [2.15.0, dev]
 #     steps:
-#       - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+#       - uses: actions/checkout@v3
 #       - uses: dart-lang/setup-dart@6a218f2413a3e78e9087f638a238f6b40893203d
 #         with:
 #           sdk: ${{ matrix.sdk }}
@@ -110,7 +158,7 @@ jobs:
 #     needs: test
 #     runs-on: ubuntu-latest
 #     steps:
-#       - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+#       - uses: actions/checkout@v3
 #       - uses: dart-lang/setup-dart@6a218f2413a3e78e9087f638a238f6b40893203d
 #         with:
 #           sdk: dev
