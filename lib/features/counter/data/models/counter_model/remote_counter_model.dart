@@ -5,13 +5,12 @@ import '../../../../../core/data/http/http_error.dart';
 
 /// Model class for [RemoteCounterModel]
 ///
-/// * [count] is the number of times the counter
+/// * [id] is the number of times the counter
 class RemoteCounterModel extends CounterEntity {
-  const RemoteCounterModel({required this.countA, required this.countB})
-      : super(count: countA);
+  const RemoteCounterModel({required this.id}) : super(count: id);
 
   factory RemoteCounterModel.fromEntity(CounterEntity entity) =>
-      RemoteCounterModel(countA: entity.count, countB: 0);
+      RemoteCounterModel(id: entity.count);
 
   factory RemoteCounterModel.fromJson(String source) {
     final Map<String, dynamic> counterJson = json.decode(source);
@@ -19,51 +18,33 @@ class RemoteCounterModel extends CounterEntity {
   }
 
   factory RemoteCounterModel.fromMap(Map<String, dynamic> json) {
-    if (!json.keys.toSet().containsAll(<String>['countA', 'countB'])) {
+    if (!json.keys.toSet().containsAll(<String>['id'])) {
       throw HttpStatus4xxErrorClient.unprocessableEntity_422.exception(
         data: json,
-        detail: "Not found key 'countA' and 'countB' in JSON",
+        detail: "Not found key 'id' in JSON",
       );
     }
 
-    late int countA;
-    late int countB;
+    late int id;
 
     try {
-      countA = json['countA'].toInt();
+      id = json['id'].toInt();
     } catch (_) {
-      countA = int.parse(json['countA']);
+      id = int.parse(json['id']);
     }
 
-    try {
-      countB = json['countB'].toInt();
-    } catch (_) {
-      countB = int.parse(json['countB']);
-    }
-
-    return RemoteCounterModel(
-      countA: countA,
-      countB: countB,
-    );
+    return RemoteCounterModel(id: id);
   }
 
-  /// [countA] is the number of times the counterA
-  final int countA;
-
-  /// [countB] is the number of times the counterB
-  final int countB;
+  /// [id] is the number of times the counterA
+  final int id;
 
   @override
-  String toString() => 'RemoteCounterModel(countA: $countA, countB: $countB)';
+  String toString() => 'RemoteCounterModel(id: $id)';
 
-  Map<String, dynamic> toMap() {
-    return {
-      'countA': countA,
-      'countB': countB,
-    };
-  }
+  Map<String, dynamic> toMap() => {'id': id};
 
   String toJson() => json.encode(toMap());
 
-  CounterEntity toEntity() => CounterEntity(count: countA);
+  CounterEntity toEntity() => CounterEntity(count: id);
 }
