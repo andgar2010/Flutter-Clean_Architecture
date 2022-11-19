@@ -54,6 +54,11 @@ jobs:
           author_email: dev@tech-andgar.me
           message: 'Updated coverage_badge.svg'
           add: 'coverage_badge.svg'
+      - name: Upload coverage
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: coverage/lcov.info
 
       # - uses: invertase/github-action-dart-analyzer@v1
       #   with:
