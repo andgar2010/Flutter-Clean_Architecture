@@ -2,9 +2,9 @@ name: "analyze"
 on: # rebuild any PRs and main branch changes
   pull_request:
     # branches: [ master ]
-  push:
-    branches:
-      - main # [ master ]
+  # push:
+  #   branches:
+  #     - main # [ master ]
   schedule:
     - cron: "0 0 * * 0"
 
@@ -82,84 +82,3 @@ jobs:
       #     # (Optional) The working directory to run the Dart analyzer in
       #     # (defaults to `./`).
       #     working-directory: ./
-
-# name: Dart CI
-
-# on:
-#   # Run on PRs and pushes to the default branch.
-#   push:
-#     branches: [ main ]
-#   pull_request:
-#     branches: [ main ]
-#   schedule:
-#     - cron: "0 0 * * 0"
-
-# env:
-#   PUB_ENVIRONMENT: bot.github
-
-# jobs:
-#   # Check code formatting and static analysis on a single OS (linux)
-#   # against Dart dev.
-#   analyze:
-#     runs-on: ubuntu-latest
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         sdk: [dev]
-#     steps:
-#       - uses: actions/checkout@v3
-#       - uses: dart-lang/setup-dart@v1.3
-#         with:
-#           sdk: ${{ matrix.sdk }}
-#       - id: install
-#         name: Install dependencies
-#         run: dart pub get
-#         run: dart pub get
-#       - name: Check formatting
-#         run: dart format --output=none --set-exit-if-changed .
-#         if: always() && steps.install.outcome == 'success'
-#       - name: Analyze code
-#         run: dart analyze --fatal-infos
-#         if: always() && steps.install.outcome == 'success'
-
-#   # Run tests on a matrix consisting of two dimensions:
-#   # 1. OS: ubuntu-latest, macos-latest, windows-latest
-#   # 2. release channel: dev
-#   test:
-#     needs: analyze
-#     runs-on: ${{ matrix.os }}
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         os: [ubuntu-latest, macos-latest, windows-latest]
-#         sdk: [2.15.0, dev]
-#     steps:
-#       - uses: actions/checkout@v3
-#       - uses: dart-lang/setup-dart@6a218f2413a3e78e9087f638a238f6b40893203d
-#         with:
-#           sdk: ${{ matrix.sdk }}
-#       - id: install
-#         name: Install dependencies
-#         run: dart pub get
-#       - name: Run VM tests
-#         run: dart test --platform vm
-#         if: always() && steps.install.outcome == 'success'
-
-#   coverage:
-#     needs: test
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v3
-#       - uses: dart-lang/setup-dart@6a218f2413a3e78e9087f638a238f6b40893203d
-#         with:
-#           sdk: dev
-#       - id: install
-#         name: Install dependencies
-#         run: dart pub get
-#       - name: Collect and report coverage
-#         run: dart run bin/test_with_coverage.dart --port=9292
-#       - name: Upload coverage
-#         uses: coverallsapp/github-action@9ba913c152ae4be1327bfb9085dc806cedb44057
-#         with:
-#           github-token: ${{ secrets.GITHUB_TOKEN }}
-#           path-to-lcov: coverage/lcov.info
