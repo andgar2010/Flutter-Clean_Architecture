@@ -2,9 +2,9 @@ name: "analyze"
 on: # rebuild any PRs and main branch changes
   pull_request:
     # branches: [ master ]
-  # push:
-  #   branches:
-  #     - main # [ master ]
+  push:
+    branches:
+      - main # [ master ]
   schedule:
     - cron: "0 0 * * 0"
 
