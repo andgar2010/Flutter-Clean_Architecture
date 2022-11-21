@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-import 'package:http_exception/http_exception.dart';
-
+import '../../../../../core/core.dart';
 import '../../../domain/domain.dart';
 
 /// Model class for [LocalCounterModel]
@@ -33,7 +32,7 @@ class LocalCounterModel extends CounterEntity {
   @override
   String toString() => 'LocalCounterModel(count: $count)';
 
-  Map<String, dynamic> toMap() => {'count': count};
+  Map<String, dynamic> toMap() => <String, dynamic>{'count': count};
 
   String toJson() => json.encode(toMap());
 

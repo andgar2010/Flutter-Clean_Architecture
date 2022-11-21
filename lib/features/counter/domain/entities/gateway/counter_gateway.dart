@@ -1,4 +1,4 @@
-import '../../entities.dart';
+import '../entities.dart';
 import '../counter_entity.dart';
 
 abstract class CounterGateway {
