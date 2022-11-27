@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import '../../../../../core/core.dart';
-import '../../../domain/entities/entities.dart';
-import '../../../domain/usecases/usecases.dart';
+import '../../../domain/domain.dart';
 import '../../models/counter_model/remote_counter_model.dart';
 
 class RemoteLoadCurrentCounter implements LoadCurrentCounter {
