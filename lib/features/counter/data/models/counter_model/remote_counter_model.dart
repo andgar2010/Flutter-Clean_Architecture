@@ -36,7 +36,7 @@ class RemoteCounterModel extends CounterEntity {
     return RemoteCounterModel(id: id);
   }
 
-  /// [id] is the number of times the counterA
+  /// [id] is the number of times the counterId
   final int id;
 
   @override
