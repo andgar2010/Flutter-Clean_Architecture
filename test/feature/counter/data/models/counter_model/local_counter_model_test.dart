@@ -28,12 +28,19 @@ void main() {
       expect(localCounterModel, isA<LocalCounterModel>());
       expect(localCounterModel.toString(), 'LocalCounterModel(count: 1)');
     });
-    test('factory LocalCounterModel fromJson() test', () {
+    test('factory LocalCounterModel fromJson() value int test', () {
       const String dataJson = '{"count":2000, "countA":1000}';
       final LocalCounterModel localCounterModel =
           LocalCounterModel.fromJson(dataJson);
       expect(localCounterModel, isA<LocalCounterModel>());
       expect(localCounterModel.toString(), 'LocalCounterModel(count: 2000)');
+    });
+    test('factory LocalCounterModel fromJson() value string test', () {
+      const String dataJson = '{"count":"4000", "countA":1000}';
+      final LocalCounterModel localCounterModel =
+          LocalCounterModel.fromJson(dataJson);
+      expect(localCounterModel, isA<LocalCounterModel>());
+      expect(localCounterModel.toString(), 'LocalCounterModel(count: 4000)');
     });
     test('factory LocalCounterModel fromJson() failure test', () {
       try {

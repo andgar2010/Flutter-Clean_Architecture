@@ -26,7 +26,16 @@ class LocalCounterModel extends CounterEntity {
       );
     }
 
-    return LocalCounterModel(count: json['count'].toInt());
+    late int count;
+
+    try {
+      count = json['count'].toInt();
+    } catch (_) {
+      // From String of JSON to Int
+      count = int.parse(json['count']);
+    }
+
+    return LocalCounterModel(count: count);
   }
 
   @override
