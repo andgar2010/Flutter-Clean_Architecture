@@ -48,12 +48,14 @@ void main() {
         LocalCounterModel.fromJson(dataJson);
       } on HttpException catch (e) {
         expect(
-            e.toString(),
-            endsWith(
-                "HTTP Status 422 - Unprocessable Entity: Not found key 'count' "
-                "in JSON, HTTP data = {countA: 2000, countB: 1000}"));
-        expect(e.message, endsWith("Not found key 'count' in JSON"));
-        expect(e.status.toString(), endsWith('422'));
+          e.toString(),
+          contains(
+            "HTTP Status 422 - Unprocessable Entity: Not found key 'count' "
+            "in JSON, HTTP data = {countA: 2000, countB: 1000}",
+          ),
+        );
+        expect(e.message, contains("Not found key 'count' in JSON"));
+        expect(e.status.toString(), contains('422'));
       }
     });
     test('factory LocalCounterModel fromMap() test', () {
@@ -76,12 +78,14 @@ void main() {
         LocalCounterModel.fromMap(dataMap);
       } on HttpException catch (e) {
         expect(
-            e.toString(),
-            endsWith(
-                "HTTP Status 422 - Unprocessable Entity: Not found key 'count' "
-                "in JSON, HTTP data = {countA: 1000, countB: 500}"));
-        expect(e.message, endsWith("Not found key 'count' in JSON"));
-        expect(e.status.toString(), endsWith('422'));
+          e.toString(),
+          contains(
+            "HTTP Status 422 - Unprocessable Entity: Not found key 'count' "
+            "in JSON, HTTP data = {countA: 1000, countB: 500}",
+          ),
+        );
+        expect(e.message, contains("Not found key 'count' in JSON"));
+        expect(e.status.toString(), contains('422'));
       }
     });
   });
