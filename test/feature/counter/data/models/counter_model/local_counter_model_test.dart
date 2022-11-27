@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http_exception/http_exception.dart';
 
 void main() {
-  group('Model LocalCounter', () {
+  group('Data - Model LocalCounter', () {
     const LocalCounterModel localCounterModel = LocalCounterModel(count: 1);
     test('get field count test', () {
       expect(localCounterModel.count, 1);

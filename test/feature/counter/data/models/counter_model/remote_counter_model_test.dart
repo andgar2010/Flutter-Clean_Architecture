@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http_exception/http_exception.dart';
 
 void main() {
-  group('Model RemoteCounter', () {
+  group('Data - Model RemoteCounter', () {
     const RemoteCounterModel remoteCounterModel = RemoteCounterModel(id: 1);
 
     test('get field count test', () {

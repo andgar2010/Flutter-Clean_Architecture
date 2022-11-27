@@ -2,7 +2,7 @@ import 'package:clean_architecture_counter/features/counter/counter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('Entity Counter', () {
+  group('Domain - Entity Counter', () {
     const CounterEntity counter = CounterEntity(count: 1);
     test("toString() test", () {
       expect(counter.toString(), 'CounterEntity(count: 1)');
