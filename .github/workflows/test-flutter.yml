@@ -26,6 +26,9 @@ jobs:
       - id: disabled_analytics_flutter
         name: Disabled Analytics Flutter
         run: flutter config --no-analytics
+      - id: disabled_analytics_dart
+        name: Disabled Analytics Dart
+        run: dart --disable-analytics
       - id: checking_version_flutter
         name: Check version Flutter is installed
         run: flutter --version
