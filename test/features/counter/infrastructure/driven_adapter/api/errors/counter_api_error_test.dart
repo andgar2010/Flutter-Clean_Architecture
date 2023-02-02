@@ -8,6 +8,7 @@ void main() {
     }
 
     test('should throw CounterApiError with message', () {
+      expect(throwError, throwsException);
       expect(throwError, throwsA(isA<CounterApiError>()));
       expect(
         throwError,
