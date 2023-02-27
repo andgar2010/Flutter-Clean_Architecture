@@ -7,8 +7,6 @@ import '../../../../data/data.dart';
 import '../../../../domain/domain.dart';
 import 'errors/counter_api_error.dart';
 
-class MockHttpClient extends Mock implements http.Client {}
-
 class RemoteCounterApi extends CounterGateway {
   RemoteCounterApi(this.client);
 

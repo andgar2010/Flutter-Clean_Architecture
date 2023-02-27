@@ -2,7 +2,7 @@ import 'package:clean_architecture_counter/features/counter/counter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../infrastructure/driven_adapter/api/remote_counter_api_test.dart';
+import '../../mock.dart';
 
 void main() {
   group('Config - Provider Counter', () {

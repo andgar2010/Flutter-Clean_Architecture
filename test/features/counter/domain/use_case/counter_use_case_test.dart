@@ -2,7 +2,9 @@ import 'package:clean_architecture_counter/features/counter/domain/domain.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class FakeApi extends Mock implements CounterGateway {}
+import '../../mock.dart';
+
+
 
 void main() {
   late CounterUseCase counterUseCase;

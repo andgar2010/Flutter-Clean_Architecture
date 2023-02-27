@@ -7,9 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MockRemoteCounterApi extends Mock implements RemoteCounterApi {}
-
-class MockHttpClient extends Mock implements http.Client {}
+import '../../../mock.dart';
 
 void main() {
   group('Infrastructure - Remote Counter Api', () {
