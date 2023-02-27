@@ -53,7 +53,7 @@ jobs:
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
-          author_name: Andres Garcia
+          author_name: Andrés García
           author_email: dev@tech-andgar.me
           message: 'Updated coverage_badge.svg'
           add: 'coverage_badge.svg'
