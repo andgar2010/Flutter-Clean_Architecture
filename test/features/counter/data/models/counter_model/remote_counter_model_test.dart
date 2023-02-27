@@ -1,6 +1,6 @@
+import 'package:clean_architecture_counter/core/core.dart';
 import 'package:clean_architecture_counter/features/counter/counter.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http_exception/http_exception.dart';
 
 void main() {
   group('Data - Model RemoteCounter', () {
@@ -43,18 +43,13 @@ void main() {
       try {
         const String dataJson = '{"CountB":2000}';
         RemoteCounterModel.fromJson(dataJson);
-      } on HttpException catch (e) {
+      } on InvalidJSONResponseException catch (e) {
         expect(
           e.toString(),
-          endsWith(
-              "HTTP Status 422 - Unprocessable Entity: Not found key 'id' in "
-              "JSON, HTTP data = {CountB: 2000}"),
+          endsWith("Invalid JSON response - Key not found = ['id']; "
+              "Current HTTP data = {CountB: 2000}"),
         );
-        expect(
-          e.message,
-          endsWith("Not found key 'id' in JSON"),
-        );
-        expect(e.status.toString(), endsWith('422'));
+        expect(e.missingKeys, ['id']);
       }
     });
     test('factory RemoteCounterModel fromMap() [id String] test', () {
@@ -92,18 +87,13 @@ void main() {
           'countB': 500,
         };
         RemoteCounterModel.fromMap(dataMap);
-      } on HttpException catch (e) {
+      } on InvalidJSONResponseException catch (e) {
         expect(
           e.toString(),
-          endsWith(
-              "HTTP Status 422 - Unprocessable Entity: Not found key 'id' in "
-              "JSON, HTTP data = {count: 1000, countB: 500}"),
+          contains("Invalid JSON response - Key not found = ['id']; "
+              "Current HTTP data = {count: 1000, countB: 500}"),
         );
-        expect(
-          e.message,
-          endsWith("Not found key 'id' in JSON"),
-        );
-        expect(e.status.toString(), endsWith('422'));
+        expect(e.missingKeys, ['id']);
       }
     });
   });

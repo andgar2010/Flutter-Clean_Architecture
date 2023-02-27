@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+// import '../../../../../core/core.dart';
 import '../../../../../core/core.dart';
 import '../../../domain/domain.dart';
 
@@ -20,9 +21,9 @@ class LocalCounterModel extends CounterEntity {
   factory LocalCounterModel.fromMap(Map<String, dynamic> json) {
     // var abc = !json.containsKey(<String>['count']);
     if (!json.keys.toSet().containsAll(<String>['count'])) {
-      throw HttpStatus4xxErrorClient.unprocessableEntity_422.exception(
+      throw InvalidJSONResponseException(
         data: json,
-        detail: "Not found key 'count' in JSON",
+        missingKeys: ['count'],
       );
     }
 
@@ -31,7 +32,7 @@ class LocalCounterModel extends CounterEntity {
     try {
       count = json['count'].toInt();
     } catch (_) {
-      // From String of JSON to Int
+      /// If value of JSON is String, convert to Int
       count = int.parse(json['count']);
     }
 

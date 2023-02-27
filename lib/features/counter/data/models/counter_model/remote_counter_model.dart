@@ -19,9 +19,9 @@ class RemoteCounterModel extends CounterEntity {
 
   factory RemoteCounterModel.fromMap(Map<String, dynamic> json) {
     if (!json.keys.toSet().containsAll(<String>['id'])) {
-      throw HttpStatus4xxErrorClient.unprocessableEntity_422.exception(
+      throw InvalidJSONResponseException(
         data: json,
-        detail: "Not found key 'id' in JSON",
+        missingKeys: ['id'],
       );
     }
 

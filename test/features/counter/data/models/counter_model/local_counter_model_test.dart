@@ -1,6 +1,6 @@
+import 'package:clean_architecture_counter/core/core.dart';
 import 'package:clean_architecture_counter/features/counter/counter.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http_exception/http_exception.dart';
 
 void main() {
   group('Data - Model LocalCounter', () {
@@ -46,16 +46,14 @@ void main() {
       try {
         const String dataJson = '{"countA":2000, "countB":1000}';
         LocalCounterModel.fromJson(dataJson);
-      } on HttpException catch (e) {
+      } on InvalidJSONResponseException catch (e) {
         expect(
           e.toString(),
-          contains(
-            "HTTP Status 422 - Unprocessable Entity: Not found key 'count' "
-            "in JSON, HTTP data = {countA: 2000, countB: 1000}",
-          ),
+          contains("Invalid JSON response - Key not found = ['count']; "
+              "Current HTTP data = {countA: 2000, countB: 1000}"),
         );
-        expect(e.message, contains("Not found key 'count' in JSON"));
-        expect(e.status.toString(), contains('422'));
+
+        expect(e.missingKeys, ['count']);
       }
     });
     test('factory LocalCounterModel fromMap() test', () {
@@ -76,16 +74,14 @@ void main() {
           'countB': 500,
         };
         LocalCounterModel.fromMap(dataMap);
-      } on HttpException catch (e) {
+      } on InvalidJSONResponseException catch (e) {
         expect(
           e.toString(),
-          contains(
-            "HTTP Status 422 - Unprocessable Entity: Not found key 'count' "
-            "in JSON, HTTP data = {countA: 1000, countB: 500}",
-          ),
+          contains("Invalid JSON response - Key not found = ['count']; "
+              "Current HTTP data = {countA: 1000, countB: 500}"),
         );
-        expect(e.message, contains("Not found key 'count' in JSON"));
-        expect(e.status.toString(), contains('422'));
+
+        expect(e.missingKeys, ['count']);
       }
     });
   });
