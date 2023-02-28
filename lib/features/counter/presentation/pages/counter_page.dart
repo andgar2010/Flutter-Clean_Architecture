@@ -52,34 +52,28 @@ class _CounterPageState extends State<CounterPage> {
           ],
         ),
       ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FloatingActionButton(
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(left: 32.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            FloatingActionButton(
               onPressed: _decrementCounter,
               tooltip: 'Decrement',
               child: const Icon(Icons.remove),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FloatingActionButton(
+            FloatingActionButton(
               onPressed: _resetCounter,
               tooltip: 'Reset',
               child: const Icon(Icons.refresh),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FloatingActionButton(
+            FloatingActionButton(
               onPressed: _incrementCounter,
               tooltip: 'Increment',
               child: const Icon(Icons.add),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
