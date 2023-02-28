@@ -23,28 +23,14 @@ class InvalidJSONResponseException extends FormatException {
     for (int i = 0; i < missingKeys.length; i++) {
       String key = missingKeys[i];
       b.write("'$key'");
-      if (i == (missingKeys.length - 1)) {
-        b.write(']; ');
-        break;
-      } else {
-        b.write(",");
-      }
+      b.write(i == (missingKeys.length - 1) ? ']; ' : ",");
     }
 
-    if (uri != null) {
-      b.write('uri = $uri, ');
-    }
+    b.write(uri != null ? 'uri = $uri, ' : '');
+
     if (data != null) {
       b.write('Current HTTP data = $data');
     }
     return b.toString();
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'message': 'Invalid JSON response - Key not found =',
-      'missingKeys': missingKeys,
-      'uri': uri,
-    }..addAll(data ?? <String, dynamic>{});
   }
 }
