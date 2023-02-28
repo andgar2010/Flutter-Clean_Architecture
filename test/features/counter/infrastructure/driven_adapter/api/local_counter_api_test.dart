@@ -9,7 +9,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../mock.dart';
 
-
 void main() {
   group('Infrastructure - Local Counter Api', () {
     late http.Client httpClient;
