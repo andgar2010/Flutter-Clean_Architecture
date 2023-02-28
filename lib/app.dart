@@ -20,6 +20,7 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
+          useMaterial3: true,
           primarySwatch: Colors.blue,
         ),
         home: const CounterPage(title: 'Flutter Demo Home Page'),
