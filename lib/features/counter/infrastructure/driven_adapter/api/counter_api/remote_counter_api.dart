@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:mocktail/mocktail.dart';
 
 import '../../../../data/data.dart';
 import '../../../../domain/domain.dart';
