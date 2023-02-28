@@ -4,13 +4,11 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../mock.dart';
 
-
-
 void main() {
   late CounterUseCase counterUseCase;
   late CounterGateway api;
   setUp(() {
-    api = FakeApi();
+    api = MockApi();
     counterUseCase = CounterUseCase(api);
   });
   group('Domain - UseCase Counter', () {
