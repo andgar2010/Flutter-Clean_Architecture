@@ -8,28 +8,10 @@ import 'errors/counter_api_error.dart';
 
 class LocalCounterApi extends CounterGateway {
   LocalCounterApi(this.client);
-  final http.Client client;
 
   static const url = 'https://counter.free.beeceptor.com';
 
-  @override
-  Future<CounterEntity> getCount() async {
-    final Uri url = Uri.parse(LocalCounterApi.url);
-
-    try {
-      final http.Response response = await client.get(url);
-      if (response.statusCode != 200) {
-        throw CounterApiError(
-            'Failed to get count: HTTP ${response.statusCode}');
-      }
-      final LocalCounterModel counterDataLocal =
-          LocalCounterModel.fromJson(response.body);
-      final CounterEntity countEntity = counterDataLocal.toEntity();
-      return countEntity;
-    } catch (e) {
-      throw CounterApiError('Failed to get count: $e');
-    }
-  }
+  final http.Client client;
 
   @override
   Future<List<CounterEntity>> getAllCounts() async {
@@ -51,5 +33,25 @@ class LocalCounterApi extends CounterGateway {
       rethrow;
     }
   }
+
+  @override
+  Future<CounterEntity> getCount() async {
+    final Uri url = Uri.parse(LocalCounterApi.url);
+
+    try {
+      final http.Response response = await client.get(url);
+      if (response.statusCode != 200) {
+        throw CounterApiError(
+            'Failed to get count: HTTP ${response.statusCode}');
+      }
+      final LocalCounterModel counterDataLocal =
+          LocalCounterModel.fromJson(response.body);
+      final CounterEntity countEntity = counterDataLocal.toEntity();
+      return countEntity;
+    } catch (e) {
+      throw CounterApiError('Failed to get count: $e');
+    }
+  }
+
 // incrementCounter
 }

@@ -9,29 +9,9 @@ import 'errors/counter_api_error.dart';
 class RemoteCounterApi extends CounterGateway {
   RemoteCounterApi(this.client);
 
-  final http.Client client;
-
   static const url = 'https://fakestoreapi.com/products';
 
-  @override
-  Future<CounterEntity> getCount() async {
-    final Uri url = Uri.parse('${RemoteCounterApi.url}/products/1');
-
-    try {
-      final http.Response response = await client.get(url);
-      if (response.reasonPhrase != 'OK') {
-        throw CounterApiError(
-            'Failed to get count: HTTP ${response.statusCode}');
-      }
-
-      final RemoteCounterModel counterDataRemote =
-          RemoteCounterModel.fromJson(response.body);
-      final CounterEntity countEntity = counterDataRemote.toEntity();
-      return countEntity;
-    } catch (e) {
-      throw CounterApiError('Failed to get count: $e');
-    }
-  }
+  final http.Client client;
 
   @override
   Future<List<CounterEntity>> getAllCounts() async {
@@ -55,6 +35,26 @@ class RemoteCounterApi extends CounterGateway {
       return countsEntities;
     } catch (e) {
       rethrow;
+    }
+  }
+
+  @override
+  Future<CounterEntity> getCount() async {
+    final Uri url = Uri.parse('${RemoteCounterApi.url}/products/1');
+
+    try {
+      final http.Response response = await client.get(url);
+      if (response.reasonPhrase != 'OK') {
+        throw CounterApiError(
+            'Failed to get count: HTTP ${response.statusCode}');
+      }
+
+      final RemoteCounterModel counterDataRemote =
+          RemoteCounterModel.fromJson(response.body);
+      final CounterEntity countEntity = counterDataRemote.toEntity();
+      return countEntity;
+    } catch (e) {
+      throw CounterApiError('Failed to get count: $e');
     }
   }
 }
