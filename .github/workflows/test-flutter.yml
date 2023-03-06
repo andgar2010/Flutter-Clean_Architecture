@@ -17,12 +17,12 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest] # or: macos-latest, windows-latest
-        sdk: [stable] # or: 'beta', 'dev' or 'master'
+        channel: [stable] # or: 'beta', 'dev' or 'master'
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
-          sdk: ${{ matrix.sdk }}
+          channel: ${{ matrix.channel }}
       - id: disabled_analytics_flutter
         name: Disabled Analytics Flutter
         run: flutter config --no-analytics
