@@ -6,7 +6,6 @@ import '../../mock.dart';
 
 void main() {
   group('Config - Provider Counter', () {
-    test('UseCase Counter', () {});
     late CounterProvider counterProvider;
 
     setUp(() {
