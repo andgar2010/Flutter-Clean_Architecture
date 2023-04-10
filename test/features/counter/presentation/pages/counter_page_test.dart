@@ -94,5 +94,53 @@ void main() {
       expect(find.text('2'), findsNothing);
       expect(find.text('0'), findsOneWidget);
     });
+
+    testWidgets('meets androidTapTargetGuideline', (WidgetTester tester) async {
+      final SemanticsHandle handle = tester.ensureSemantics();
+      await tester.pumpWidget(ui);
+      await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+      handle.dispose();
+    });
+    testWidgets('meets iOSTapTargetGuideline', (WidgetTester tester) async {
+      final SemanticsHandle handle = tester.ensureSemantics();
+      await tester.pumpWidget(ui);
+      await expectLater(tester, meetsGuideline(iOSTapTargetGuideline));
+      handle.dispose();
+    });
+    testWidgets('meets labeledTapTargetGuideline', (WidgetTester tester) async {
+      final SemanticsHandle handle = tester.ensureSemantics();
+      await tester.pumpWidget(ui);
+      await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
+      handle.dispose();
+    });
+    testWidgets('meet text contrast guidelines, light mode',
+        (WidgetTester tester) async {
+      final SemanticsHandle handle = tester.ensureSemantics();
+      await tester.pumpWidget(ui);
+      await expectLater(tester, meetsGuideline(textContrastGuideline));
+      handle.dispose();
+    });
+    testWidgets(
+        'Menu icon satisfies accessibility contrast ratio guidelines, light mode',
+        (WidgetTester tester) async {
+      final SemanticsHandle handle = tester.ensureSemantics();
+      await tester.pumpWidget(ui);
+      await expectLater(
+        tester,
+        meetsGuideline(
+          CustomMinimumContrastGuideline(
+            finder: find.byWidgetPredicate((Widget widget) {
+              if (widget is Icon) {
+                return true;
+              } else {
+                return false;
+              }
+            }),
+          ),
+        ),
+      );
+
+      handle.dispose();
+    });
   });
 }

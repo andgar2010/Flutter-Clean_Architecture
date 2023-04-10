@@ -9,6 +9,13 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = const Color(0xff2196f3);
+    HSLColor hslColor = HSLColor.fromColor(primaryColor);
+    HSLColor darkerColor =
+        hslColor.withLightness((hslColor.lightness - 0.1).clamp(0.0, 1.0));
+    // ignore: unused_local_variable
+    Color darkPrimaryColor = darkerColor.toColor();
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -19,9 +26,26 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
+        darkTheme: ThemeData.dark(
+          useMaterial3: true,
+
+          // primaryColor: darkPrimaryColor,
+          // iconTheme: IconThemeData(color: Colors.black),
+          // primarySwatch: Colors.blue,
+        ).copyWith(
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: darkPrimaryColor,
+            foregroundColor: Colors.white70,
+          ),
+        ),
         theme: ThemeData(
           useMaterial3: true,
-          primarySwatch: Colors.blue,
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+            // backgroundColor: darkPrimaryColor,
+            foregroundColor: Colors.white,
+            backgroundColor: darkPrimaryColor,
+          ),
+          // primarySwatch: Colors.red,
         ),
         home: const CounterPage(title: 'Flutter Demo Home Page'),
       ),
